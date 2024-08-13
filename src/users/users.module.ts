@@ -1,11 +1,10 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { PrismaModule } from 'src/prisma/prisma.module';  // Importe o PrismaModule
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
-  imports: [PrismaModule],  // Adicione o PrismaModule aos imports
+  imports: [PrismaModule],
   controllers: [UsersController],
   providers: [UsersService],
 })

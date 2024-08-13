@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Prisma, User } from '@prisma/client';

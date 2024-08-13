@@ -1,9 +1,9 @@
-/* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Put, Patch } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { User } from '@prisma/client';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -23,5 +23,20 @@ export class UsersController {
   @ApiResponse({ status: 200, description: 'Return all users.' })
   async findAll(): Promise<User[]> {
     return this.usersService.findAll();
+  }
+  
+  @Delete('/delete/:id')
+  async deleteUser(@Param('id') id: string){
+    const userId = parseInt(id, 10)
+    return this.usersService.delete(userId)
+  }
+
+  @Patch('/edit/:id')
+  async editUser(
+    @Param('id') id: string,
+    @Body() editUser: UpdateUserDto,
+  ): Promise<User> {
+    const userId = parseInt(id, 10)
+    return this.usersService.edit(userId, editUser)
   }
 }
